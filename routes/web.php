@@ -20,11 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', [SiteController::class, 'home']);
-Route::get('contato', [SiteController::class, 'contato']);
-Route::get('sobre', [SiteController::class, 'sobre']);
-
-Route::get('servico/{codigo?}', VerServicos::class);
+// Route::get('home', [SiteController::class, 'home']);
+// Route::get('contato', [SiteController::class, 'contato']);
+// Route::get('sobre', [SiteController::class, 'sobre']);
+// Route::get('servico/{codigo?}', VerServicos::class);
 
 Route::get('clientes', [ClienteController::class, 'index']);
 Route::get('clientes/create', [ClienteController::class, 'create']);
