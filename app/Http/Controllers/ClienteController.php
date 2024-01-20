@@ -44,12 +44,13 @@ class ClienteController extends Controller
             'descricao' => ['required']
         ]);
 
-        $novoCliente = new Client;
-        $novoCliente->nome = $request->input('nome');
-        $novoCliente->endereco = $request->input('endereco');
-        $novoCliente->descricao = $request->input('descricao');
+        Client::create($request->except('_token'));
 
-        $novoCliente->save();
+        // $novoCliente = new Client;
+        // $novoCliente->nome = $request->input('nome');
+        // $novoCliente->endereco = $request->input('endereco');
+        // $novoCliente->descricao = $request->input('descricao');
+        // $novoCliente->save();
 
         return redirect('/clientes');
     }
