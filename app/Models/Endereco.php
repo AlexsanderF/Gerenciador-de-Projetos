@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Funcionario extends Model
+class Endereco extends Model
 {
     use HasFactory;
 
-    protected $table = 'cadfun';
+    protected $table = 'cadend';
 
     protected $primaryKey = 'codigo';
 
@@ -18,12 +18,12 @@ class Funcionario extends Model
     const UPDATED_AT = 'data_atualizacao';
 
     /**
-     * Um funcionário tem um endereço
+     * Um endereço pertence a um funcionário
      * 
-     * @return HasOne 
+     * @return BelongsTo 
      */
-    public function endereco()
+    public function funcionario()
     {
-        return $this->hasOne(Endereco::class, 'codigo_fun', 'codigo');
+        return $this->belongsTo(Funcionario::class, 'codigo_fun', 'codigo');
     }
 }
