@@ -10,6 +10,8 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final'];
+
     /**
      * Um projeto pertence a um cliente
      * 
