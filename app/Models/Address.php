@@ -10,6 +10,8 @@ class Address extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'];
+
     /**
      * Mapeia o relacionamento com funcionário
      * Um endereço pertence a um funcionário
