@@ -40,6 +40,9 @@
                         <th scope="col" class="px-6 py-3">
                             Descrição
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Projetos
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +56,17 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{ $cliente->descricao }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @forelse ($cliente->projects as $projeto)
+                                    @if ($loop->last) 
+                                        {{ $projeto->nome }}
+                                    @else
+                                        {{ $projeto->nome }}{{ ', ' }}
+                                    @endif    
+                                @empty
+                                    Nenhum projeto
+                                @endforelse
                             </td>
                         </tr>
                     @endforeach
