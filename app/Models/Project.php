@@ -30,6 +30,6 @@ class Project extends Model
      */
     public function employees()
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->belongsToMany(Employee::class, 'employee_project', 'project_id', 'employee_id');
     }
 }
