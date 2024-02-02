@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Employee extends Model
@@ -23,5 +24,15 @@ class Employee extends Model
     public function address()
     {
         return $this->hasOne(Address::class);
+    }
+
+    /**
+     * Um funcionário pertence a muitos projetos
+     * 
+     * @return BelongsToMany 
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
     }
 }

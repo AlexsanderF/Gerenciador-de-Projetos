@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Model
 {
@@ -20,5 +21,15 @@ class Project extends Model
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
+
+    /**
+     * Um projeto pertence a muitos funcionários
+     * 
+     * @return BelongsToMany 
+     */
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class);
     }
 }
