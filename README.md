@@ -1,13 +1,13 @@
-## Projeto desenvolvido no curso de Laravel Fundamentos
+## Projeto desenvolvido no curso de Laravel Eloquent
 
-Desenvolvido no curso de Laravel Fundamentos
+Desenvolvido no curso de Laravel Eloquent
 
 ### Instalando o projeto
 
 #### Clonar o repositório
 
 ```
-git clone https://github.com/treinaweb/treinaweb-laravel-fundamentos-v2.git
+git clone https://github.com/treinaweb/treinaweb-eloquent-fundamentos-v2.git
 ```
 
 #### Instalar as depencências
