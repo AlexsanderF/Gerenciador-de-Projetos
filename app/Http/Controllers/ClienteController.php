@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClienteRequest;
 use App\Models\Client;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
+/**
+ * Controller do @Client
+ */
 class ClienteController extends Controller
 {
     /**
@@ -37,6 +41,7 @@ class ClienteController extends Controller
 
     /**
      * Grava o cliente no banco de dados
+     * @return RedirectResponse
      */
     public function store(ClienteRequest $request)
     {
@@ -45,6 +50,11 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')->with('mensagem', 'Cliente cadastrado com sucesso.');
     }
 
+    /**
+     * Mostra o formulário preenchido para edição
+     * @param Client $cliente
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
     public function show(Client $cliente)
     {
         return view('clientes.show', [
@@ -52,6 +62,12 @@ class ClienteController extends Controller
         ]);
     }
 
+    /**
+     * Atualiza o cliente no banco de dados
+     * @param ClienteRequest $request
+     * @param Client $cliente
+     * @return RedirectResponse
+     */
     public function update(ClienteRequest $request, Client $cliente)
     {
         //$cliente = Client::findOrFail($cliente->id);
@@ -60,6 +76,11 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')->with('mensagem', 'Cliente atualizado com sucesso.');
     }
 
+    /**
+     * Apaga um cliente do banco de dados
+     * @param Client $cliente
+     * @return RedirectResponse
+     */
     public function destroy(Client $cliente)
     {
         $cliente->delete();
