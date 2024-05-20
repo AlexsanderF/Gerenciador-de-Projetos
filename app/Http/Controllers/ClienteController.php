@@ -11,12 +11,12 @@ class ClienteController extends Controller
 {
     /**
      * Lista os clientes do banco de dados
-     * 
-     * @return View|Factory 
+     *
+     * @return View|Factory
      */
     public function index()
     {
-        $clientes = Client::get();
+        $clientes = Client::paginate(5);
         $clientes->load('projects');
 
         return view('clientes.index', [
@@ -26,8 +26,8 @@ class ClienteController extends Controller
 
     /**
      * Mostra o formulário de cadastro de clientes
-     * 
-     * @return View|Factory 
+     *
+     * @return View|Factory
      */
     public function create()
     {
