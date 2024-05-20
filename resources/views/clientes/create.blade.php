@@ -3,7 +3,7 @@
         <h1 class="text-4xl font-bold text-center my-4">
             Cadastrar novo Cliente
         </h1>
-        <form method="post" action="/clientes" class="max-w-6xl mx-auto">
+        <form method="post" action="{{route('clientes.store')}}" class="max-w-6xl mx-auto">
             @csrf
             <div class="mb-5">
                 <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nome do

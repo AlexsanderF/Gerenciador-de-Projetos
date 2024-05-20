@@ -53,6 +53,6 @@ class ClienteController extends Controller
         // $novoCliente->descricao = $request->input('descricao');
         // $novoCliente->save();
 
-        return redirect('/clientes');
+        return redirect()->route('clientes.index');
     }
 }

@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('clientes', [ClienteController::class, 'index']);
-Route::get('clientes/create', [ClienteController::class, 'create']);
-Route::post('clientes', [ClienteController::class, 'store']);
+Route::get('clients', [ClienteController::class, 'index'])->name('clientes.index');
+Route::get('client/create', [ClienteController::class, 'create'])->name('clientes.create');
+Route::post('clients', [ClienteController::class, 'store'])->name('clientes.store');

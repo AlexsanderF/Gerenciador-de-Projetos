@@ -5,7 +5,8 @@
         </h1>
 
         <div class="flex justify-end my-3">
-            <a class="bg-green-500 border rounded-md p-1 px-3 text-white" href="/clientes/create">Criar cliente</a>
+            <a class="bg-green-500 border rounded-md p-1 px-3 text-white"
+               href="{{route('clientes.create')}}">Criar cliente</a>
         </div>
 
         <div class="relative overflow-x-auto">
