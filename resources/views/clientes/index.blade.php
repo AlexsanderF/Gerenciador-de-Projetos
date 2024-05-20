@@ -50,7 +50,18 @@
                             @endforelse
                         </td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('clientes.show', $cliente->id) }}">Editar</a>
+                            <a href="{{ route('clientes.show', $cliente->id) }}"
+                               class="bg-blue-500 border rounded-md p-1 px-3 text-black">
+                                Editar
+                            </a>
+                            <form method="post" action="{{ route('clientes.destroy', $cliente->id) }}">
+                                @method('DELETE')
+                                @csrf
+                                <button onclick="return confirm('Deseja realmente apagar o cliente?')"
+                                        class="bg-red-500 border rounded-md my-2 p-1 px-3 text-black">
+                                    Deletar
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @empty
