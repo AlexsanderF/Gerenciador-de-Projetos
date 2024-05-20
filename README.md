@@ -7,7 +7,7 @@ Desenvolvido no curso de Laravel Eloquent
 #### Clonar o repositório
 
 ```
-git clone https://github.com/treinaweb/treinaweb-eloquent-fundamentos-v2.git
+git clone https://github.com/AlexsanderF/Gerenciador-de-Projetos.git
 ```
 
 #### Instalar as depencências
