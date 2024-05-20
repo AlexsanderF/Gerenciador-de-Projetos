@@ -53,6 +53,6 @@ class ClienteController extends Controller
         // $novoCliente->descricao = $request->input('descricao');
         // $novoCliente->save();
 
-        return redirect()->route('clientes.index');
+        return redirect()->route('clientes.index')->with('mensagem', 'Cliente cadastrado com sucesso.');
     }
 }
