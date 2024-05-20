@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClienteRequest;
 use App\Models\Client;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
@@ -37,22 +38,25 @@ class ClienteController extends Controller
     /**
      * Grava o cliente no banco de dados
      */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        $request->validate([
-            'nome' => ['required', 'min:3', 'max:100'],
-            'endereco' => ['required', 'max:200'],
-            'descricao' => ['required']
-        ]);
-
-        Client::create($request->except('_token'));
-
-        // $novoCliente = new Client;
-        // $novoCliente->nome = $request->input('nome');
-        // $novoCliente->endereco = $request->input('endereco');
-        // $novoCliente->descricao = $request->input('descricao');
-        // $novoCliente->save();
+        Client::create($request->all());
 
         return redirect()->route('clientes.index')->with('mensagem', 'Cliente cadastrado com sucesso.');
+    }
+
+    public function show(Client $cliente)
+    {
+        return view('clientes.show', [
+            'cliente' => $cliente
+        ]);
+    }
+
+    public function update(ClienteRequest $request, Client $cliente)
+    {
+        //$cliente = Client::findOrFail($cliente->id);
+        $cliente->update($request->all());
+
+        return redirect()->route('clientes.index')->with('mensagem', 'Cliente atualizado com sucesso.');
     }
 }

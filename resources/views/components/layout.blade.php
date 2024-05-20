@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>{{$titulo}}</title>
+    <title>{{ $titulo }}</title>
 </head>
 <body>
 <nav class="bg-gray-300">
@@ -37,10 +37,13 @@
         {{ session('mensagem') }}
     </div>
 @endif
-
-<!-- BODY DA APLICAÇÃO USANDO COMPONENTE -->
-{{ $slot }}
-
+<div class="container mx-auto">
+    <h1 class="text-4xl font-bold text-center my-4">
+        {{ $titulo }}
+    </h1>
+    <!-- BODY DA APLICAÇÃO USANDO COMPONENTE -->
+    {{ $slot }}
+</div>
 </body>
 </html>
 

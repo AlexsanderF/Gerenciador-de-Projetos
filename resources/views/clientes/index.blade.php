@@ -1,9 +1,5 @@
 <x-layout titulo="Lista de Clientes">
     <div class="container mx-auto">
-        <h1 class="text-4xl font-bold text-center my-4">
-            Lista de Clientes
-        </h1>
-
         <div class="flex justify-end my-3">
             <a class="bg-green-500 border rounded-md p-1 px-3 text-white"
                href="{{route('clientes.create')}}">Criar cliente</a>
@@ -24,6 +20,9 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Projetos
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Ações
                     </th>
                 </tr>
                 </thead>
@@ -47,8 +46,11 @@
                                     {{ $projeto->nome }}{{ ', ' }}
                                 @endif
                             @empty
-                                Nenhum projeto
+                                <pre>Nenhum projeto</pre>
                             @endforelse
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('clientes.show', $cliente->id) }}">Editar</a>
                         </td>
                     </tr>
                 @empty
@@ -56,7 +58,7 @@
                         <td></td>
                         <td></td>
                         <th class="p-4">
-                            Nenhum Cliente Cadastrado.
+                            <pre>Nenhum Cliente Cadastrado</pre>
                         </th>
                         <td></td>
                     </tr>
