@@ -15,8 +15,8 @@ class Address extends Model
     /**
      * Mapeia o relacionamento com funcionário
      * Um endereço pertence a um funcionário
-     * 
-     * @return BelongsTo 
+     *
+     * @return BelongsTo
      */
     public function employee()
     {
