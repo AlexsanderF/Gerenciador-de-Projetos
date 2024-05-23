@@ -32,16 +32,12 @@ class FuncionarioController extends Controller
      */
     public function store(FuncionarioRequest $request)
     {
-        try {
-            DB::beginTransaction();
-            $funcionario = Employee::create($request->only('nome', 'cpf', 'data_contratacao'));
+        $create = Employee::criar(
+            $request->only('nome', 'cpf', 'data_contratacao'),
+            $request->only('logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep')
+        );
 
-            $funcionario->address()->create(
-                request()->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'])
-            );
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
+        if (!$create) {
             return redirect()->back()->withErrors('Não foi possível criar o funcionario.');
         }
 
@@ -67,18 +63,14 @@ class FuncionarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FUncionarioRequest $request, Employee $funcionario)
+    public function update(FuncionarioRequest $request, Employee $funcionario)
     {
-        try {
-            DB::beginTransaction();
+        $update = $funcionario->atualizar(
+            $request->only(['nome', 'cpf', 'data_contratacao']),
+            $request->only('logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep')
+        );
 
-            $funcionario->update($request->only('nome', 'cpf', 'data_contratacao'));
-            $funcionario->address()->update($request->only('logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'));
-
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-
+        if (!$update) {
             return redirect()->back()->withErrors('Erro ao atualizar o funcionario.');
         }
         return redirect()->route('funcionarios.index')->with('success', 'Funcionario atualizado com sucesso!');

@@ -77,7 +77,7 @@
                 </tbody>
             </table>
             <div class="my-2">
-                {{$clientes->links()}}
+                {{ $clientes->links() }}
             </div>
         </div>
     </div>
