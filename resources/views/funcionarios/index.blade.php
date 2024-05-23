@@ -63,7 +63,7 @@
                 </tbody>
             </table>
             <div class="my-2">
-{{--                {{$funcionario->links()}}--}}
+                {{ $funcionarios->links() }}
             </div>
         </div>
     </div>

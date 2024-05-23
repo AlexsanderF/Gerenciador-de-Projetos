@@ -16,7 +16,8 @@ class FuncionarioController extends Controller
     {
         $funcionarios = Employee::paginate(5);
 
-        return view('funcionarios.index', compact('funcionarios'));
+        return view('funcionarios.index', [
+            'funcionarios' => $funcionarios]);
     }
 
     /**
