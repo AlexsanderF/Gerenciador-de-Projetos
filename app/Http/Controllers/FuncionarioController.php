@@ -59,17 +59,29 @@ class FuncionarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Employee $funcionario)
     {
-        //
+        return view('funcionarios.edit', compact('funcionario'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FUncionarioRequest $request, Employee $funcionario)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $funcionario->update($request->only('nome', 'cpf', 'data_contratacao'));
+            $funcionario->address()->update($request->only('logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'));
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->back()->withErrors('Erro ao atualizar o funcionario.');
+        }
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionario atualizado com sucesso!');
     }
 
     /**
