@@ -33,7 +33,7 @@
                             {{ $funcionario->cpf }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ 'Av. Paulista, 100 - Centro, São Paulo SP' }}
+                            {{ $funcionario->address->endereco_completo }}
                         </td>
                         <td class="px-6 py-4">
                             <a href="{{ route('funcionarios.edit', $funcionario->id) }}"

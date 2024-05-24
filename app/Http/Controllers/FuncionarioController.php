@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FuncionarioRequest;
 use App\Models\Employee;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+/**
+ * Controller @FuncionarioController
+ */
 class FuncionarioController extends Controller
 {
     /**
@@ -80,8 +81,14 @@ class FuncionarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Employee $funcionario)
     {
-        //
+        $delete = $funcionario->deletar();
+
+        if (!$delete) {
+            return redirect()->back()->withErrors('Erro ao deletar o funcionario.');
+        }
+
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionario deletado com sucesso!');
     }
 }

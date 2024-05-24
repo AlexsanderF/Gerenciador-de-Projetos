@@ -31,7 +31,7 @@ class Address extends Model
     }
 
     /**
-     * Retorna o endereço do funcionário completo usando o método assessor
+     * Retorna o endereço do funcionário completo usando o método Accessors.
      * @return Attribute
      */
     protected function enderecoCompleto(): Attribute
