@@ -86,4 +86,24 @@ class Employee extends Model
         }
         return true;
     }
+
+    /**
+     * Apaga o funcionario e seu respectivo endereço do banco de dados.
+     * @return bool
+     */
+    public function deletar(): bool
+    {
+        try {
+            DB::beginTransaction();
+
+            $this->address()->delete();
+            $this->delete();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return false;
+        }
+        return true;
+    }
 }
