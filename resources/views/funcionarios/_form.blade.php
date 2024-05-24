@@ -21,3 +21,27 @@
 </fieldset>
 
 <x-button-primary titulo="Salvar"/>
+
+@push('scripts')
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        IMask(document.getElementById('cpf'), {
+            mask: '000.000.000-00',
+            lazy: false,
+            placeholder: '000.000.000.00'
+        });
+        IMask(document.getElementById('data_contratacao'), {
+            mask: '00/00/0000',
+            lazy: false,
+            placeholder: '00/00/0000'
+        });
+        IMask(document.getElementById('cep'), {
+            mask: '00.000-000',
+            lazy: false,
+            placeholder: '00.000-000'
+        });
+        IMask(document.getElementById('numero'), {
+            mask: Number
+        });
+    </script>
+@endpush

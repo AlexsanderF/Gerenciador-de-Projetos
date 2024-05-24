@@ -44,6 +44,7 @@
     <!-- BODY DA APLICAÇÃO USANDO COMPONENTE -->
     {{ $slot }}
 </div>
+@stack('scripts')
 </body>
 </html>
 
