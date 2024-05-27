@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FuncionarioRequest extends FormRequest
@@ -14,17 +15,29 @@ class FuncionarioRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $dados = $this->all();
+        if (isset($dados['cpf']) || isset($dados['cep'])) {
+            $dados['cpf'] = str_replace(['.', '-'], '', $dados['cpf']);
+            $dados['cep'] = str_replace(['.', '-'], '', $dados['cep']);
+        }
+
+        $this->replace($dados);
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'nome' => ['required', 'string', 'max:100', 'min:3'],
             'cpf' => ['required', 'size:11'],
-            'data_contratacao' => ['required'],
+            'data_contratacao' => ['required', 'date_format:d/m/Y'],
             'logradouro' => ['required', 'string', 'max:100', 'min:3'],
             'numero' => ['required', 'string', 'max:20'],
             'bairro' => ['required', 'string', 'max:50'],

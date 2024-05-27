@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,6 +23,18 @@ class Employee extends Model
      * @var string[]
      */
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    /**
+     * Formata a data de contratação para entrada e saída
+     * @return Attribute
+     */
+    protected function dataContratacao(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => Carbon::make($value)->format('d/m/Y'),
+            set: fn(string $value) => Carbon::make($value)->format('Y-m-d')
+        );
+    }
 
     /**
      * Mapeia o relacionamento com o endereço

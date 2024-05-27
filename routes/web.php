@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\AtividadeController;
 use App\Http\Controllers\FuncionarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,7 @@ Route::put('clients/{cliente}', [ClienteController::class, 'update'])->name('cli
 Route::delete('clients/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
 Route::resource('funcionarios', FuncionarioController::class);
+
+Route::resource('atividades', AtividadeController::class);
+
+
