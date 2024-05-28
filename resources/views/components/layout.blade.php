@@ -12,6 +12,7 @@
 
 <!-- ERROS DE VALIDAÇÕES, SE HOUVER. -->
 @if ($errors->any())
+
     <div class="flex justify-between items-center p-2 bg-red-500 text-white border-2 border-red-500 rounded-sm">
         <span class="text-xs">Erros de validação</span>
         <ul class="flex flex-col mt-1">
@@ -28,6 +29,7 @@
         {{ session('mensagem') }}
     </div>
 @endif
+
 <div class="container mx-auto">
     <h1 class="text-4xl font-bold text-center my-4">
         {{ $titulo }}
@@ -35,6 +37,7 @@
     <!-- BODY DA APLICAÇÃO USANDO COMPONENTE -->
     {{ $slot }}
 </div>
+
 @stack('scripts')
 </body>
 </html>
