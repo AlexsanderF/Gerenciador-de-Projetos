@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\AtividadeController;
+use App\Http\Controllers\DemitirFuncionario;
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\ProjetoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +30,9 @@ Route::put('clients/{cliente}', [ClienteController::class, 'update'])->name('cli
 Route::delete('clients/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
 Route::resource('funcionarios', FuncionarioController::class)->except('show');
+Route::patch('funcionarios/{funcionario}/demissao', DemitirFuncionario::class)->name('funcionarios.demitir');
+
+Route::resource('projetos', ProjetoController::class);
 
 Route::resource('atividades', AtividadeController::class)->only(['index', 'create', 'store', 'update', 'edit', 'destroy']);
 

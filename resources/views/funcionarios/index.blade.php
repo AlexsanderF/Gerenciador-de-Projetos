@@ -35,7 +35,7 @@
                         <td class="px-6 py-4">
                             {{ $funcionario->address->endereco_completo }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 flex align-items-center gap-3">
                             <a href="{{ route('funcionarios.edit', $funcionario->id) }}"
                                class="bg-blue-500 border rounded-md p-1 px-3 text-black">
                                 Editar
@@ -43,9 +43,19 @@
                             <form method="post" action="{{ route('funcionarios.destroy', $funcionario->id) }}">
                                 @method('DELETE')
                                 @csrf
-                                <button onclick="return confirm('Deseja realmente apagar o cliente?')"
-                                        class="bg-red-500 border rounded-md my-2 p-1 px-3 text-black">
+                                <button onclick="return confirm('Deseja realmente apagar o funcionário?')"
+                                        class="bg-red-500 border rounded-md p-1 px-3 text-black">
                                     Deletar
+                                </button>
+                            </form>
+                            <form method="post" action="{{ route('funcionarios.demitir', $funcionario->id) }}">
+                                @method('PATCH')
+                                @csrf
+                                <button
+                                    onclick="return confirm('Deseja realmente demitir o funcionário?')"
+                                    class="bg-orange-500 border rounded-md p-1 px-3 text-black disabled:bg-gray-400"
+                                    {{ $funcionario->data_demissao ? 'disabled' : '' }}>
+                                    {{ $funcionario->data_demissao ? 'Demitido' : 'Demitir' }}
                                 </button>
                             </form>
                         </td>

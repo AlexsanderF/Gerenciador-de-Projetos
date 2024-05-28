@@ -11,11 +11,11 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final'];
+    protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final', 'client_id'];
 
     /**
-     * Um projeto pertence a um cliente
-     * 
+     * Um projetos pertence a um cliente
+     *
      * @return BelongsTo
      */
     public function client()
@@ -24,9 +24,9 @@ class Project extends Model
     }
 
     /**
-     * Um projeto pertence a muitos funcionários
-     * 
-     * @return BelongsToMany 
+     * Um projetos pertence a muitos funcionários
+     *
+     * @return BelongsToMany
      */
     public function employees()
     {
