@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FuncionarioRequest;
 use App\Models\Employee;
+use Faker\Factory;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 /**
  * Controller @FuncionarioController
@@ -11,9 +15,9 @@ use App\Models\Employee;
 class FuncionarioController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostra a lista de funcionários
      */
-    public function index()
+    public function index(): Factory|View
     {
         $funcionarios = Employee::paginate(5);
 
@@ -22,17 +26,17 @@ class FuncionarioController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra o formulári para criar um novo funcionário
      */
-    public function create()
+    public function create(): Factory|View
     {
         return view('funcionarios.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Cria um novo funcionario no banco de dados.
      */
-    public function store(FuncionarioRequest $request)
+    public function store(FuncionarioRequest $request): RedirectResponse|Redirector
     {
         $create = Employee::criar(
             $request->only('nome', 'cpf', 'data_contratacao'),
@@ -40,32 +44,24 @@ class FuncionarioController extends Controller
         );
 
         if (!$create) {
-            return redirect()->back()->withErrors('Não foi possível criar o funcionario.');
+            return redirect()->back()->withInput()->withErrors('Não foi possível criar o funcionario.');
         }
 
         return redirect()->route('funcionarios.index')->with('success', 'Funcionario cadastrado com sucesso!');
     }
 
     /**
-     * Display the specified resource.
+     * Mostra o formulário com os dados para edição.
      */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Employee $funcionario)
+    public function edit(Employee $funcionario): Factory|View
     {
         return view('funcionarios.edit', compact('funcionario'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza um funcionário especifico.
      */
-    public function update(FuncionarioRequest $request, Employee $funcionario)
+    public function update(FuncionarioRequest $request, Employee $funcionario): RedirectResponse|Redirector
     {
         $update = $funcionario->atualizar(
             $request->only(['nome', 'cpf', 'data_contratacao']),
@@ -73,15 +69,15 @@ class FuncionarioController extends Controller
         );
 
         if (!$update) {
-            return redirect()->back()->withErrors('Erro ao atualizar o funcionario.');
+            return redirect()->back()->withInput()->withErrors('Erro ao atualizar o funcionario.');
         }
         return redirect()->route('funcionarios.index')->with('success', 'Funcionario atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deleta um funcionário especifico.
      */
-    public function destroy(Employee $funcionario)
+    public function destroy(Employee $funcionario): RedirectResponse|Redirector
     {
         $delete = $funcionario->deletar();
 

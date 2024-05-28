@@ -27,8 +27,8 @@ Route::get('clients/{cliente}/edit', [ClienteController::class, 'show'])->name('
 Route::put('clients/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
 Route::delete('clients/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
-Route::resource('funcionarios', FuncionarioController::class);
+Route::resource('funcionarios', FuncionarioController::class)->except('show');
 
-Route::resource('atividades', AtividadeController::class);
+Route::resource('atividades', AtividadeController::class)->only(['index', 'create', 'store', 'update', 'edit', 'destroy']);
 
 
