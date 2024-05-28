@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjetoRequest;
 use App\Models\Project;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,7 +30,7 @@ class ProjetoController extends Controller
     /**
      * Cria um novo projetos no banco de dados.
      */
-    public function store(Request $request): \Redirect|RedirectResponse
+    public function store(ProjetoRequest $request): \Redirect|RedirectResponse
     {
         Project::create($request->all());
 
