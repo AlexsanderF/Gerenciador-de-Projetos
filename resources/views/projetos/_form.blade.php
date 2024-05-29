@@ -7,6 +7,25 @@
 
 <x-input nome="data_final" labelTitulo="Data final do projeto" :editar="$projeto->data_final ?? ''"/>
 
-<x-input nome="client_id" labelTitulo="Selecione o cliente" :editar="$projeto->client_id ?? ''"/>
+<x-select nome="client_id" labelTitulo="Selecione o projeto" itemID="id" itemDesc="nome"
+          :editar="$projeto->client_id ?? ''"
+          :items="$clientes"/>
 
 <x-button-primary titulo="Salvar"/>
+
+@push('scripts')
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        let data = '00/00/0000'
+        IMask(document.getElementById('data_inicio'), {
+            mask: data,
+            lazy: false,
+            placeholder: data
+        });
+        IMask(document.getElementById('data_final'), {
+            mask: data,
+            lazy: false,
+            placeholder: data
+        })
+    </script>
+@endpush

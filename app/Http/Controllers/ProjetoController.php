@@ -4,19 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjetoRequest;
 use App\Models\Project;
+use App\Models\Client;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ProjetoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View|Factory
     {
-        echo 'estou aqui';
+        $projetos = Project::paginate(5);
+        $projetos->load('client');
+        $clientes = Client::all();
+
+        return view('projetos.index', [
+            'projetos' => $projetos,
+            'clientes' => $clientes
+        ]);
     }
 
     /**
@@ -24,7 +31,9 @@ class ProjetoController extends Controller
      */
     public function create(): View|Factory
     {
-        return view('projetos.create');
+        $clientes = Client::all();
+
+        return view('projetos.create', compact('clientes'));
     }
 
     /**
@@ -46,26 +55,32 @@ class ProjetoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * MOSTRA O FORMULÁRIO com os dados para edição.
      */
-    public function edit(string $id)
+    public function edit(Project $projeto): View|Factory
     {
-        //
+        $clientes = Client::all();
+        return view('projetos.edit', [
+            'projeto' => $projeto,
+            'clientes' => $clientes
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza o projeto no banco de dados.
      */
-    public function update(Request $request, string $id)
+    public function update(ProjetoRequest $request, Project $projeto): \Redirect|RedirectResponse
     {
-        //
+        $projeto->update($request->all());
+        return redirect()->route('projetos.index')->with('success', 'Projeto atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deleta o projeto
      */
-    public function destroy(string $id)
+    public function destroy(Project $projeto): RedirectResponse
     {
-        //
+        $projeto->delete();
+        return redirect()->route('projetos.index')->with('success', 'Projeto removido com sucesso!');
     }
 }

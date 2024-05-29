@@ -15,8 +15,9 @@
     <x-input nome="numero" labelTitulo="Numero" :editar="$funcionario->address->numero ?? ''"/>
     <x-input nome="bairro" labelTitulo="Bairro" :editar="$funcionario->address->bairro ?? ''"/>
     <x-input nome="cidade" labelTitulo="Cidade" :editar="$funcionario->address->cidade ?? ''"/>
-    <x-select nome="estado" labelTitulo="UF" :editar="$funcionario->address->estado ?? ''"
-              :lista="\App\Enums\EstadosBrasileiros::cases()"/>
+    <x-select nome="estado" itemID="name" itemDesc="value" labelTitulo="UF"
+              :editar="$funcionario->address->estado ?? ''"
+              :items="\App\Enums\EstadosBrasileiros::cases()"/>
     <x-input nome="complemento" labelTitulo="Complemento" :editar="$funcionario->address->complemento ?? ''"/>
 </fieldset>
 

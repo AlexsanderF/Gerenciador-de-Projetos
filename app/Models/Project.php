@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\DataHelpers;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +14,16 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final', 'client_id'];
+
+    protected function dataInicio(): Attribute
+    {
+        return DataHelpers::convertDate();
+    }
+
+    protected function dataFinal(): Attribute
+    {
+        return DataHelpers::convertDate();
+    }
 
     /**
      * Um projetos pertence a um cliente
