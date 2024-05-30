@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjetoRequest;
+use App\Models\Employee;
 use App\Models\Project;
 use App\Models\Client;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class @ProjetoController
+ */
 class ProjetoController extends Controller
 {
     /**
@@ -32,8 +36,12 @@ class ProjetoController extends Controller
     public function create(): View|Factory
     {
         $clientes = Client::all();
+        $funcionarios = Employee::ativo()->get();
 
-        return view('projetos.create', compact('clientes'));
+        return view('projetos.create', [
+            'clientes' => $clientes,
+            'funcionarios' => $funcionarios
+        ]);
     }
 
     /**
@@ -41,7 +49,15 @@ class ProjetoController extends Controller
      */
     public function store(ProjetoRequest $request): \Redirect|RedirectResponse
     {
-        Project::create($request->all());
+
+        $projectSuccess = Project::criarComFuncionarios(
+            $request->except('funcionarios'),
+            $request->funcionarios
+        );
+
+        if (!$projectSuccess) {
+            return redirect()->back()->withInput()->withErrors(['Erro ao criar projeto']);
+        }
 
         return redirect()->route('projetos.index')->with('success', 'Projeto cadastrado com sucesso!');
     }
@@ -60,9 +76,12 @@ class ProjetoController extends Controller
     public function edit(Project $projeto): View|Factory
     {
         $clientes = Client::all();
+        $funcionarios = Employee::ativo()->get();
+
         return view('projetos.edit', [
             'projeto' => $projeto,
-            'clientes' => $clientes
+            'clientes' => $clientes,
+            'funcionarios' => $funcionarios
         ]);
     }
 
@@ -71,7 +90,15 @@ class ProjetoController extends Controller
      */
     public function update(ProjetoRequest $request, Project $projeto): \Redirect|RedirectResponse
     {
-        $projeto->update($request->all());
+        $update = $projeto->atualizarComFuncionarios(
+            $request->except('funcionarios'),
+            $request->funcionarios
+        );
+
+        if (!$update) {
+            return redirect()->back()->withInput()->withErrors(['Erro ao atualizar projeto.']);
+        }
+
         return redirect()->route('projetos.index')->with('success', 'Projeto atualizado com sucesso!');
     }
 
