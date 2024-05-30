@@ -9,20 +9,45 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ *
+ */
 class Project extends Model
 {
     use HasFactory;
 
+    /**
+     * Atributos que podem ser preenchido em massa por get/set
+     *
+     * @var string[]
+     */
     protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final', 'client_id'];
 
+    /**
+     * Função para retornar a data_inicio do projeto no padrão PT/BR
+     *
+     * @return Attribute
+     */
     protected function dataInicio(): Attribute
     {
         return DataHelpers::convertDate();
     }
 
+    /**
+     * Função para retornar a data_final do projeto no padrão PT/BR
+     *
+     * @return Attribute
+     */
     protected function dataFinal(): Attribute
     {
         return DataHelpers::convertDate();
+    }
+
+    public function orcamento(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => number_format($value, 2, ',', '.')
+        );
     }
 
     /**
