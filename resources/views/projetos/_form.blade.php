@@ -7,9 +7,13 @@
 
 <x-input nome="data_final" labelTitulo="Data final do projeto" :editar="$projeto->data_final ?? ''"/>
 
-<x-select nome="client_id" labelTitulo="Selecione o projeto" itemID="id" itemDesc="nome"
+<x-select nome="client_id" labelTitulo="Selecione o cliente do projeto" itemID="id" itemDesc="nome"
           :editar="$projeto->client_id ?? ''"
           :items="$clientes"/>
+
+<x-select-multiple nome="funcionarios" labelTitulo="Selecione os funcionários do projeto" itemID="id" itemDesc="nome"
+                   :editar=" isset($projeto) ? $projeto->employees->pluck('id')->toArray() : []"
+                   :items="$funcionarios"/>
 
 <x-button-primary titulo="Salvar"/>
 
