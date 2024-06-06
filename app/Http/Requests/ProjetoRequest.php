@@ -5,6 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ *
+ */
 class ProjetoRequest extends FormRequest
 {
     /**
@@ -15,6 +18,11 @@ class ProjetoRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Prepara os dados da request do projeto para validação.
+     *
+     * @return void
+     */
     protected function prepareForValidation(): void
     {
         $dados = $this->all();

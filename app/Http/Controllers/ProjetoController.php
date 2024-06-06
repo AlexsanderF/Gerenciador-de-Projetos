@@ -63,11 +63,11 @@ class ProjetoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostra o formulário com os dados para edição.
      */
-    public function show(string $id)
+    public function show(Project $projeto): View|Factory
     {
-        //
+        return view('projetos.show', compact('projeto'));
     }
 
     /**

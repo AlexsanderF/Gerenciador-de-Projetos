@@ -5,6 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ *
+ */
 class FuncionarioRequest extends FormRequest
 {
     /**
@@ -15,6 +18,11 @@ class FuncionarioRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Prepara os dados da request do funcionário para validação
+     *
+     * @return void
+     */
     protected function prepareForValidation(): void
     {
         $dados = $this->all();
