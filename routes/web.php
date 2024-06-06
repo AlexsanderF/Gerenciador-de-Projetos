@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\AtividadeController;
 use App\Http\Controllers\DemitirFuncionario;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProjetoController;
@@ -18,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 Route::get('clients', [ClienteController::class, 'index'])->name('clientes.index');
 Route::get('client/create', [ClienteController::class, 'create'])->name('clientes.create');
@@ -33,7 +30,5 @@ Route::resource('funcionarios', FuncionarioController::class)->except('show');
 Route::patch('funcionarios/{funcionario}/demissao', DemitirFuncionario::class)->name('funcionarios.demitir');
 
 Route::resource('projetos', ProjetoController::class);
-
-Route::resource('atividades', AtividadeController::class)->only(['index', 'create', 'store', 'update', 'edit', 'destroy']);
 
 
